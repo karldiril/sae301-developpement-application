@@ -12,8 +12,8 @@
 - **Distribution** (<ins>#id_oeuvre</ins>, <ins>ordre_generique</ins>, #id_personne, categorie_metier, intitule_poste, noms_personnages)
 
 ### 3. Tables d'association
-- **Oeuvre_Genres** (<ins>#id_oeuvre</ins>, <ins>nom_genre</ins>)
+- **Oeuvre_Genres** (<ins>#id_oeuvre</ins>, <ins>#id_genre</ins>)
 - **Realisateurs** (<ins>#id_oeuvre</ins>, <ins>#id_personne</ins>)
 - **Scenaristes** (<ins>#id_oeuvre</ins>, <ins>#id_personne</ins>)
-- **Personne_Metiers** (<ins>#id_personne</ins>, <ins>nom_metier</ins>)
+- **Personne_Metiers** (<ins>#id_personne</ins>, <ins>#id_metier</ins>)
 - **Oeuvres_Connues** (<ins>#id_personne</ins>, <ins>#id_oeuvre</ins>)
