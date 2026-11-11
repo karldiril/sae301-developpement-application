@@ -10,6 +10,8 @@
 - **Titres_Localises** (<ins>#id_oeuvre</ins>, <ins>ordre</ins>, titre, code_region, code_langue, type_diffusion, attributs_supplementaires, est_titre_original)
 - **Episodes** (<ins>#id_episode</ins>, #id_serie_parente, numero_saison, numero_episode)
 - **Distribution** (<ins>#id_oeuvre</ins>, <ins>ordre_generique</ins>, #id_personne, categorie_metier, intitule_poste, noms_personnages)
+- **Genre** (<ins>id_genre</ins>, nom_genre)
+- **Metier** (<ins>id_metier</ins>, nom_metier)
 
 ### 3. Tables d'association
 - **Oeuvre_Genres** (<ins>#id_oeuvre</ins>, <ins>#id_genre</ins>)
