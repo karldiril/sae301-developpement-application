@@ -167,23 +167,26 @@ L’entité Métier possède une clé primaire : **id_metier**.
 ## 5 - Schéma relationnel.  
 
 
-1. Entités principales
+### 1. Entités principales
 
-Oeuvres (id_oeuvre, type_oeuvre, titre_principal, titre_original, pour_adulte, annee_sortie, annee_fin, duree_minutes)
-Personnes (id_personne, nom_complet, annee_naissance, annee_deces)
-2. Tables dépendantes
+**Oeuvres** (<ins>id_oeuvre</ins>, type_oeuvre, titre_principal, titre_original, pour_adulte, annee_sortie, annee_fin, duree_minutes)  
+**Personnes** (<ins>id_personne</ins>, nom_complet, annee_naissance, annee_deces)  
 
-Evaluations (#id_oeuvre, note_moyenne, nombre_votes)
-Titres_Localises (#id_oeuvre, ordre, titre, code_region, code_langue, type_diffusion, attributs_supplementaires, est_titre_original)
-Episodes (#id_episode, #id_serie_parente, numero_saison, numero_episode)
-Distribution (#id_oeuvre, ordre_generique, #id_personne, categorie_metier, intitule_poste, noms_personnages)
-Genre (id_genre, nom_genre)
-Metier (id_metier, nom_metier)
 
-3. Tables d'association
+### 2. Tables dépendantes
 
-Oeuvre_Genres (#id_oeuvre, #id_genre)
-Realisateurs (#id_oeuvre, #id_personne)
-Scenaristes (#id_oeuvre, #id_personne)
-Personne_Metiers (#id_personne, #id_metier)
-Oeuvres_Connues (#id_personne, #id_oeuvre)
+**Evaluations** (<ins>#id_oeuvre</ins>, note_moyenne, nombre_votes)  
+**Titres_Localises** (<ins>#id_oeuvre, ordre</ins>, titre, code_region, code_langue, type_diffusion, attributs_supplementaires, est_titre_original)  
+**Episodes** (<ins>#id_episode</ins>, #id_serie_parente, numero_saison, numero_episode)  
+**Distribution** (<ins>#id_oeuvre, ordre_generique</ins>, #id_personne, categorie_metier, intitule_poste, noms_personnages)  
+**Genre** (<ins>id_genre</ins>, nom_genre)  
+**Metier** (<ins>id_metier</ins>, nom_metier)  
+
+
+### 3. Tables d'association
+
+**Oeuvre_Genres** (<ins>#id_oeuvre, #id_genre</ins>)  
+**Realisateurs** (<ins>#id_oeuvre, #id_personne</ins>)  
+**Scenaristes** (<ins>#id_oeuvre, #id_personne</ins>)  
+**Personne_Metiers** (<ins>#id_personne, #id_metier</ins>)  
+**Oeuvres_Connues** (<ins>#id_personne, #id_oeuvre</ins>)  
