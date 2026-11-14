@@ -26,7 +26,7 @@ Pour les séries, il nous fallait une table qui nous permettrait donc d’associ
 
 Nous allons avoir également besoin des informations dans le fichier “title.principals.tsv.gz” avec “nconst” qui nous permet de savoir le nom et prénom des personnes, “category” qui permet de savoir le travaille de la personne, “job” qui nous permet de savoir le poste de la personne et “character” qui nous permet de savoir le nom du personnage qu’il jouer. Ces données seront utilisées dans la table Distribution.
 
-
+<br>
 
 ## 2 - Identification des principales entités.  
 
@@ -49,3 +49,141 @@ Nous avons donc identifié comme principales entités :
 <ins>Genre :</ins> Avec un identifiant de genre et un type de genre.
 
 <ins>Métier :</ins> Avec un identifiant de métier et un type de métier.
+
+
+<br>
+
+
+## 3 - Relation entre les tables. 
+
+Un réalisateur peut avoir réalisé aucune ou plusieurs œuvres      
+- Personnes(0,n)-> Oeuvre
+
+Une œuvre peut avoir aucun, un ou plusieurs réalisateurs 		      
+- Oeuvres(0,n)-> Personnes  
+
+<br>
+
+Un scénariste  peut en avoir écrit aucune ou plusieurs œuvres 		
+- Personnes(0,n)-> Oeuvres
+
+Une œuvre peut avoir aucun ou plusieurs scénaristes 		          
+- Oeuvres(0,n)-> Personnes  
+
+<br>
+
+Un genre peut avoir aucune ou plusieurs oeuvre			              
+- Genre(0,n)->Oeuvre
+
+Une oeuvre peut avoir aucun ou plusieur genre			                
+- Oeuvre(0,n)->Genre
+
+<br>
+
+Un métier peut avoir aucune ou plusieur personne			            
+- Metier(0,n)->Personne
+
+Une personne peut avoir aucun ou plusieur métier			            
+- Personne(0,n)->Métier  
+
+<br>
+
+Une évaluation n’a qu’une oeuvre					                        
+- Evaluation(1,1)->Oeuvre
+
+Une oeuvre peut avoir aucune ou une évaluation			              
+- Oeuvre (0,1)->Evaluation  
+
+<br>
+
+Un titre localisé à une oeuvre						                        
+- Titre_localise(1,1)->Oeuvre
+
+Une oeuvre peut avoir aucun ou plusieur titre localisé		        
+- Oeuvre(0,n)->Titre_localise  
+
+<br>
+
+Une oeuvre peut avoir aucune ou plusieur distribution		          
+- Oeuvre(0,n)->Distribution
+
+Une distribution n’a qu’une oeuvre					                      
+- Distribution(1,1)->Oeuvre  
+
+<br>
+
+Une distribution n’a qu’une personne					                    
+- Distribution(1,1)->Personne
+
+Une personne peut avoir aucune ou plusieur distribution		        
+- Personne(0,n)->Distribution  
+
+<br>
+
+Un épisode est une oeuvre qui appartient à une série qui est une oeuvre	    
+- Episode(1,1)-> Oeuvre
+
+Un épisode appartient forcément à une série parente.			                  
+- Oeuvre (0,1) -> Episode
+
+Une oeuvre peut ne pas être une série					                              
+- Episode(1,1) -> Oeuvre
+
+Une oeuvre peut être la série parente de zéro, un ou plusieurs épisodes	    
+- Oeuvre(0,n) -> Episode  
+
+
+
+
+<br>
+
+## 4 - Clés primaires et clés étrangères.
+  
+L’entité Oeuvres possède une clé primaire : **id_oeuvre**.  
+
+L’entité Personnes possède une clé primaire : **id_personne**.  
+
+L’entité Evaluations possède une clé primaire qui est clé étrangère : **id_oeuvre** qui fait référence à la table Oeuvres.  
+
+L’entité Titres_Localises possède une clé primaire composé avec une clef étrangère : **id_oeuvre** qui fait référence à la table Oeuvres et ordre.  
+
+L’entité Episodes possède une clé primaire qui est clé étrangère : **id_episode**.   
+Et une clé étrangère : **id_serie_parente** qui fait référence à la table Oeuvres.   
+
+L’entité Distribution possède une clé primaire composé avec une clef étrangère : **id_oeuvre** qui fait référence à la table Oeuvres et **ordre_générique**.  
+Et une clé étrangère : **id_personne** qui fait référence à la table Personnes   
+
+L’entité Genre possède une clé primaire : **id_genre**.  
+
+L’entité Métier possède une clé primaire : **id_metier**.  
+
+
+
+
+<br>
+
+
+
+## 5 - Schéma relationnel.  
+
+
+1. Entités principales
+
+Oeuvres (id_oeuvre, type_oeuvre, titre_principal, titre_original, pour_adulte, annee_sortie, annee_fin, duree_minutes)
+Personnes (id_personne, nom_complet, annee_naissance, annee_deces)
+2. Tables dépendantes
+
+Evaluations (#id_oeuvre, note_moyenne, nombre_votes)
+Titres_Localises (#id_oeuvre, ordre, titre, code_region, code_langue, type_diffusion, attributs_supplementaires, est_titre_original)
+Episodes (#id_episode, #id_serie_parente, numero_saison, numero_episode)
+Distribution (#id_oeuvre, ordre_generique, #id_personne, categorie_metier, intitule_poste, noms_personnages)
+Genre (id_genre, nom_genre)
+Metier (id_metier, nom_metier)
+
+3. Tables d'association
+
+Oeuvre_Genres (#id_oeuvre, #id_genre)
+Realisateurs (#id_oeuvre, #id_personne)
+Scenaristes (#id_oeuvre, #id_personne)
+Personne_Metiers (#id_personne, #id_metier)
+Oeuvres_Connues (#id_personne, #id_oeuvre)
