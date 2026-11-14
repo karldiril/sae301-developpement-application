@@ -36,10 +36,22 @@ Relecture du contenue du livrable 3 et ajout/modifications du contenue écrit.
 
 Recherche d'informations sur les versions des logiciels, les extensions et les modules potentiels avec l'explication de nos choix.  
 
-## 4-Livrable 4 (16 Octobre 2026) :  
+## 5-Livrable 5 (11/14/15 Novembre 2026) :  
 
 ### Individuel :  
-Analyse des points clés dans le sujet de la SAE pour la rédaction du livrable 4 notamment sur toute la partie des particularités du projet, et quelques modifications sur la partie du public visé.
+Analyse de la base de donnés fournies du site IMBd pour la rédaction du livrable 5.
+Création du schéma relationnel de la base de données.
+Création du script de création de table et de copie des données.
+Indicateur de performance du script de copie des données.
+Création du script shell.
 
-Relecture du contenue du livrable 4 et ajout/modifications du contenue écrit.
+
+Relecture du contenue du livrable 5 et ajout/modifications du contenue écrit.
+
+## 9-Livrable 9 (31 Octobre 2026) :  
+
+### Individuel :  
+
+Création de mes personnas selon des situations différentes avec des cas différents.
+
 
