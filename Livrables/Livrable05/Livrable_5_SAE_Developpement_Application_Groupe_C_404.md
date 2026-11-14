@@ -190,3 +190,8 @@ L’entité Métier possède une clé primaire : **id_metier**.
 **Scenaristes** (<ins>#id_oeuvre, #id_personne</ins>)  
 **Personne_Metiers** (<ins>#id_personne, #id_metier</ins>)  
 **Oeuvres_Connues** (<ins>#id_personne, #id_oeuvre</ins>)  
+
+<br>
+<br>
+
+![Schéma relationnel](Schéma_relationnel_image/Schema_relationnel.png)
