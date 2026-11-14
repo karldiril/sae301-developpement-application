@@ -19,6 +19,9 @@ Théo PALUGAN -> Karl DIRIL -> Manase SAMUEL DIAKOLO -> Lucas CHEN -> Théo PALU
 
 Le premier manager sera donc Théo (du 05/10/2026 au 18/10/2026).
 
+<br>
+<br>
+
 ## Schéma relationnel de la base de données.  
 
 
