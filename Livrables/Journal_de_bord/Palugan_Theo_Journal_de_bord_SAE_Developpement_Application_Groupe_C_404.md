@@ -70,4 +70,18 @@ Vérification du contenu des livrables, relecture et mise en page. Ajout des PDF
 
 Recherche d'information sur la création d'un persona ainsi que les informations qui le constituent et mise en page de mon livrable 9. 
 
+## 10-Livrables 5 (13 Novembre 2026) :  
 
+### Individuel :  
+
+Recherche d'informations sur les données utile pour la BD.
+
+### Collectives :  
+
+Réalisation des différentes parties dans le livrable 5 afin de pouvoir réaliser le script SQL qui a été généré avec looping, nous avons ensuite réalisé les tables temporaires puis les avons enrichies avec les fichiers. 
+
+## 11-Livrables 5 (13 Novembre 2026) :  
+
+### Individuel :  
+
+Test du script de création de la base de données, puis de son enrichissement avec le script Python. J'ai également mis au propre les fichiers PDF et créé des fichiers Markdown pour les rendus.
