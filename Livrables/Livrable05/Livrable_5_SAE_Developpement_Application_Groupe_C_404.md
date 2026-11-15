@@ -253,3 +253,131 @@ Enfin, nous avons ajouté un système pour mesurer et enregistrer les temps d’
 
 Ces informations sont enregistrées dans un fichier de log, ce qui nous permet de suivre le durées d'exécution de chaque étape et de comparer les performances à l’aide d’indicateurs clés de performance (KPI).   
 
+<br>
+
+## 9 - Script généré par looping.
+
+
+Looping nous permet de générer un code SQL de la base juste avec le schéma relationnel nous avons juste apporté quelques modifications.  
+
+CREATE TABLE OEUVRE(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;type_oeuvre VARCHAR(50) NOT NULL,  
+    &nbsp;&nbsp;titre_principal TEXT NOT NULL,   
+    &nbsp;&nbsp;titre_original TEXT,   
+    &nbsp;&nbsp;pour_adulte BOOLEAN NOT NULL,   
+    &nbsp;&nbsp;annee_sortie SMALLINT,   
+    &nbsp;&nbsp;annee_fin INT,   
+    &nbsp;&nbsp;duree_minutes INT,   
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre)   
+);  
+  
+CREATE TABLE PERSONNE(  
+    &nbsp;&nbsp;id_personne VARCHAR(15),   
+    &nbsp;&nbsp;nom_complet VARCHAR(255) NOT NULL,  
+    &nbsp;&nbsp;annee_naissance INT,  
+    &nbsp;&nbsp;annee_deces INT,  
+    &nbsp;&nbsp;PRIMARY KEY(id_personne)  
+);
+
+
+CREATE TABLE TITRE_LOCALISE(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;numero_ordre INT,  
+    &nbsp;&nbsp;titre VARCHAR(500) NOT NULL,  
+    &nbsp;&nbsp;code_region VARCHAR(10),  
+    &nbsp;&nbsp;code_langue VARCHAR(10),  
+    &nbsp;&nbsp;type_diffusion VARCHAR(100),  
+    &nbsp;&nbsp;attributs TEXT ,  
+    &nbsp;&nbsp;est_titre_original BOOLEAN,  
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre, numero_ordre),  
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre)  
+);
+
+CREATE TABLE GENRE(  
+    &nbsp;&nbsp;id_genre SERIAL,  
+    &nbsp;&nbsp;nom_genre VARCHAR(50) NOT NULL,  
+    &nbsp;&nbsp;PRIMARY KEY(id_genre),   
+    &nbsp;&nbsp;UNIQUE(nom_genre)   
+);
+
+CREATE TABLE METIER(  
+    &nbsp;&nbsp;id_metier SERIAL,  
+    &nbsp;&nbsp;nom_metier VARCHAR(50) NOT NULL,  
+    &nbsp;&nbsp;PRIMARY KEY(id_metier),  
+    &nbsp;&nbsp;UNIQUE(nom_metier)  
+);
+
+CREATE TABLE DISTRIBUTION(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;ordre_generique INT,  
+    &nbsp;&nbsp;categorie_metier VARCHAR(50),  
+    &nbsp;&nbsp;intitule_poste TEXT,  
+    &nbsp;&nbsp;noms_personnages TEXT,   
+    &nbsp;&nbsp;id_personne VARCHAR(15) NOT NULL,    
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre, ordre_generique),   
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre),  
+    &nbsp;&nbsp;FOREIGN KEY(id_personne) REFERENCES PERSONNE(id_personne)   
+);
+
+CREATE TABLE EPISODE(  
+    &nbsp;&nbsp;id_oeuvre_1 VARCHAR(50),  
+    &nbsp;&nbsp;numero_episode INT,    
+    &nbsp;&nbsp;numero_saison INT,   
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50) NOT NULL,  
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre_1),   
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre_1) REFERENCES OEUVRE(id_oeuvre),  
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre)  
+);
+
+CREATE TABLE EVALUATION(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;note_moyenne DECIMAL(3,1),   
+    &nbsp;&nbsp;nombre_votes INT,   
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre),    
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre)   
+);
+ 
+CREATE TABLE Appartenir_Genre(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;id_genre INT,   
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre, id_genre),   
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre),  
+    &nbsp;&nbsp;FOREIGN KEY(id_genre) REFERENCES GENRE(id_genre)  
+);
+
+CREATE TABLE Realiser(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;id_personne VARCHAR(15),  
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre, id_personne),    
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre),  
+    &nbsp;&nbsp;FOREIGN KEY(id_personne) REFERENCES PERSONNE(id_personne)  
+);
+CREATE TABLE Scenariser(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;id_personne VARCHAR(15),  
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre, id_personne),  
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre),  
+    &nbsp;&nbsp;FOREIGN KEY(id_personne) REFERENCES PERSONNE(id_personne)  
+);
+
+CREATE TABLE Oeuvres_Connues(  
+    &nbsp;&nbsp;id_oeuvre VARCHAR(50),  
+    &nbsp;&nbsp;id_personne VARCHAR(15),  
+    &nbsp;&nbsp;PRIMARY KEY(id_oeuvre, id_personne),  
+    &nbsp;&nbsp;FOREIGN KEY(id_oeuvre) REFERENCES OEUVRE(id_oeuvre),  
+    &nbsp;&nbsp;FOREIGN KEY(id_personne) REFERENCES PERSONNE(id_personne)  
+);
+
+CREATE TABLE Exercer_Metier(   
+    &nbsp;&nbsp;id_personne VARCHAR(15),  
+    &nbsp;&nbsp;id_metier INT,    
+    &nbsp;&nbsp;PRIMARY KEY(id_personne, id_metier),   
+    &nbsp;&nbsp;FOREIGN KEY(id_personne) REFERENCES PERSONNE(id_personne),    
+    &nbsp;&nbsp;FOREIGN KEY(id_metier) REFERENCES METIER(id_metier)   
+); 
+
+
+
+
+
