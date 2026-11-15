@@ -1,14 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 # Configuration des répertoires
-NEW_DIR="/home/ortoto/Documents/BUT2/SAE/S301/Validation_donnees"
-OLD_DIR="/home/ortoto/Documents/BUT2/SAE/S301/donnees"
+NEW_DIR="Votre chemin au repértiore"
+OLD_DIR="Votre chemin au repértiore"
 URL="https://datasets.imdbws.com"
 
-SQL_SCRIPT="/home/ortoto/Documents/BUT2/SAE/S301/ScriptCréationTables.sql"
-PYTHON_SCRIPT="/home/ortoto/Documents/BUT2/SAE/S301/ScriptImporationDonnees.py"
+SQL_SCRIPT="Votre chemin/ScriptCréationTables.sql"
+PYTHON_SCRIPT="Votre chemin/ScriptImporationDonnees.py"
 
-LOG_FILE="/home/ortoto/Documents/BUT2/SAE/S301/KPI.txt"
+LOG_FILE="Votre chemin/KPI.txt"
 
 # On affiche la date et l'heure atuelles selon l'heure configurée sur la machine, puis on les enregistre dans le fichier log.
 echo " "
