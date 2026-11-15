@@ -85,3 +85,9 @@ Réalisation des différentes parties dans le livrable 5 afin de pouvoir réali
 ### Individuel :  
 
 Test du script de création de la base de données, puis de son enrichissement avec le script Python. J'ai également mis au propre les fichiers PDF et créé des fichiers Markdown pour les rendus.
+
+## 12-Livrables 5 (13-15 Novembre 2026) :  
+
+### Individuel :  
+
+Test de toutes les versions des différents scripts et vérification de leur compatibilité entre eux. Étant le seul à disposer d'une distribution Linux à ce moment-là, je me suis chargé de réaliser l'ensemble des tests. J'ai également commenté les différents scripts réalisés.
