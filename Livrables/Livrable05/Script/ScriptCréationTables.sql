@@ -230,16 +230,16 @@ CREATE TABLE Exercer_Metier(
 -- Importation des données contenues dans les fichiers vers les table temporaire
 
 
-\copy tmp_title_basics FROM PROGRAM 'head -n 1000 /home/ortoto/Documents/BUT2/SAE/S301/donnees/title.basics.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
+\copy tmp_title_basics FROM 'Votre chemain/title.basics.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
 
-\copy tmp_name_basics FROM PROGRAM 'head -n 1000 /home/ortoto/Documents/BUT2/SAE/S301/donnees/name.basics.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
+\copy tmp_name_basics FROM 'Votre chemain/name.basics.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
 
-\copy tmp_title_ratings FROM PROGRAM 'head -n 1000 /home/ortoto/Documents/BUT2/SAE/S301/donnees/title.ratings.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
+\copy tmp_title_ratings FROM 'Votre chemain/title.ratings.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
 
-\copy tmp_title_akas FROM PROGRAM 'head -n 1000 /home/ortoto/Documents/BUT2/SAE/S301/donnees/title.akas.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
+\copy tmp_title_akas FROM 'Votre chemain/title.akas.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
 
-\copy tmp_title_episode FROM PROGRAM 'head -n 1000 /home/ortoto/Documents/BUT2/SAE/S301/donnees/title.episode.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
+\copy tmp_title_episode FROM 'Votre chemain/title.episode.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
 
-\copy tmp_title_principals FROM PROGRAM 'head -n 1000 /home/ortoto/Documents/BUT2/SAE/S301/donnees/title.principals.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
+\copy tmp_title_principals FROM 'Votre chemain/title.principals.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
 
-\copy tmp_title_crew FROM PROGRAM 'head -n 1000 /home/ortoto/Documents/BUT2/SAE/S301/donnees/title.crew.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
+\copy tmp_title_crew FROM 'Votre chemain/title.crew.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');
