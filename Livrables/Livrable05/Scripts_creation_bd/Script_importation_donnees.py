@@ -249,3 +249,6 @@ def main():
     cur.close()
     conn.close()
     print("transfert terminé")
+
+    if __name__ == "__main__":
+        main()
