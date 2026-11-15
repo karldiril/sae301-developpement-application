@@ -195,3 +195,61 @@ L’entité Métier possède une clé primaire : **id_metier**.
 <br>
 
 ![Schéma relationnel](Schéma_relationnel_image/Schema_relationnel.png)
+
+<br>
+
+
+## 6 - Script SQL
+
+
+Ce script prépare l’architecture complète de la base de données et précharge les données brut issues des fichiers de données de IMDb avant leur nettoyage et insertions par le script python.  
+
+Le script supprime d’abord toutes les tables temporaires avec DROP TABLE IF EXISTS afin de commencer sur un environnement vierge.  
+Puis il crée les 7 tables temporaires qui vont stocker les données brutes qui pour chaque attribut est typé TEXT pour simplifier la copie.
+
+Ensuite, il supprime les tables principales si elles existent pour encore une fois travailler dans un environnement vierge.Il crée les tables principales avec toutes les dépendances, le vrai typage des attributs (ex: VARCHAR,INT,BOOLEAN…)et les différents liens entre chaque table.  
+
+Puis il enchaîne avec les tables associatives qui vont servir à éviter la redondance.  
+
+Enfin, lorsque toutes ces étapes s'exécutent sans erreurs, le script va copier les données issues des fichiers dont il faut spécifier le chemin et les mettre dans les tables temporaires pour qu’ensuite ces tables soient utilisées pour remplir les vrais tables en faisant en amont un nettoyage.  
+
+Exemple de copie en ne prenant que les 1000 premières lignes :   
+
+\copy tmp_title_basics FROM PROGRAM 'head -n 1000 votre/chemin/title.basics.tsv' WITH (FORMAT csv, DELIMITER E'\t', HEADER true, QUOTE E'\b', NULL '\N', ENCODING 'UTF8');   
+
+<br>
+
+## 7 - Script Python
+
+Ce script python permet de transférer, nettoyer et structurer les données d’IMDb depuis les tables temporaires vers les 13 tables relationnelles de la base star.  
+
+Les champs bruts de la base de données temporaire sous forme de TEXT sont convertis vers les types du modèle relationnel (entiers avec to_int(), booléens pour pour_adulte, etc…)   
+
+De plus, dans les fichiers d’IMDb, plusieurs informations sont regroupées dans une même colonne séparés par des virgules (comme les genres d’un film ou les métiers d’une personne). Le script découpe ces chaînes de caractères, attribue un identifiant à chaque nouveau genre ou métier dans les tables (GENRE, METIER) puis crée les lignes correspondantes dans les tables de liaison (Appartenir_Genre, Exercer_Metier, etc…).  
+
+Deux dictionnaires en mémoire (valid_oeuvres et valid_personnes) mémorisent l’ensemble des identifiants valides importés lors des premières étapes donc chaque table dépendante comme EVALUATION ou TITRE_LOCALISES qui demandent ces id. Cela demande donc un temps constant O(1) grâces à ces tables de hachage.  
+
+Les insertions sont groupés par lots de 50 000 lignes via execute_values( , page_size=50000) afin de garder en mémoire vive les données et faire un aller retour entre Python et PostgreSQL seulement toutes les 50000 lignes.  
+
+
+<br>
+
+## 8 - Script SHELL
+
+
+Ce script Bash a pour objectif d’automatiser la mise à jour des données IMDb dans une base de données PostgreSQL.  
+
+Il permet de télécharger les dernières données disponible sur le site de IMDb (https://datasets.imdbws.com) , il va ensuite vérifier que les fichiers ne sont pas corrompus afin de s’assurer que les données récupérées sont bien exploitables.  
+
+Une fois le téléchargement terminé, notre script va comparer les nouveaux fichiers avec ceux déjà présents grâce à une commande linux qui va permet de comparer leur contenu octet par octet afin de vérifier s’ils sont identiques.  
+
+Si une différence est détectée, l’ancien fichier est automatiquement remplacé par la nouvelle version, sinon le fichier existant est conservé.  
+
+Ensuite, le script supprime l’ancienne base de données PostgreSQL et en recrée une nouvelle, avec un utilisateur.  
+
+Une fois la base créée, il exécute le script SQL, puis lance le script Python.  
+
+Enfin, nous avons ajouté un système pour mesurer et enregistrer les temps d’exécution des différentes étapes : Le téléchargement et la vérification des données, l'exécution du script SQL, celle du script Python et pour finir la durée totale du script.   
+
+Ces informations sont enregistrées dans un fichier de log, ce qui nous permet de suivre le durées d'exécution de chaque étape et de comparer les performances à l’aide d’indicateurs clés de performance (KPI).   
+
