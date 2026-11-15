@@ -241,17 +241,20 @@ Ce script Bash a pour objectif d’automatiser la mise à jour des données IMDb
 
 Il permet de télécharger les dernières données disponible sur le site de IMDb (https://datasets.imdbws.com) , il va ensuite vérifier que les fichiers ne sont pas corrompus afin de s’assurer que les données récupérées sont bien exploitables.  
 
+Ensuite, les fichiers sont compressés au format .tsv pour pouvoir être utilisés et les fichiers compressés temporaires sont supprimés.  
+
 Une fois le téléchargement terminé, notre script va comparer les nouveaux fichiers avec ceux déjà présents grâce à une commande linux qui va permet de comparer leur contenu octet par octet afin de vérifier s’ils sont identiques.  
 
-Si une différence est détectée, l’ancien fichier est automatiquement remplacé par la nouvelle version, sinon le fichier existant est conservé.  
+Si une différence est détectée, l’ancien fichier est automatiquement remplacé par la nouvelle version. Si le fichier n’existe pas encore, il est ajouté, sinon le fichier existant est conservé.  
 
 Ensuite, le script supprime l’ancienne base de données PostgreSQL et en recrée une nouvelle, avec un utilisateur.  
 
 Une fois la base créée, il exécute le script SQL, puis lance le script Python.  
+   
+Enfin, nous avons ajouté un système pour mesurer et enregistrer les temps d’exécution des différentes étapes : Le téléchargement, la vérification des données, la décompression, la comparaison des données et l'exécution du script SQL, celle du script Python et pour finir la durée totale du script.   
 
-Enfin, nous avons ajouté un système pour mesurer et enregistrer les temps d’exécution des différentes étapes : Le téléchargement et la vérification des données, l'exécution du script SQL, celle du script Python et pour finir la durée totale du script.   
+Ces informations sont enregistrées dans un fichier de log, ce qui nous permet de suivre le durées d'exécution de chaque étape et de comparer les performances à l’aide d’indicateurs clés de performance (KPI).    
 
-Ces informations sont enregistrées dans un fichier de log, ce qui nous permet de suivre le durées d'exécution de chaque étape et de comparer les performances à l’aide d’indicateurs clés de performance (KPI).   
 
 <br>
 
